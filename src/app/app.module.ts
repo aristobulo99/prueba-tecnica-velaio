@@ -7,7 +7,6 @@ import { InputComponent } from './shared/components/atom/input/input.component';
 
 @NgModule({
   declarations: [
-    HomeComponent,
   ],
   imports: [
     BrowserModule,
