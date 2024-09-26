@@ -1,5 +1,13 @@
-    <section class="p-1">
-        <app-button [name]="'Agregar tarea'" ></app-button>
-<br>
-        <app-button [name]="'Agregar tarea'" [disable]="true" ></app-button>
+<section class="w-[100%] h-[88vh] lg:h-[90%] p-[0.625rem] lg:p-3">
+    <section class="w-full h-full bg-white rounded flex flex-col p-3 lg:px-9 lg:py-4">
+        <div class="flex flex-row justify-between items-center">
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-violet-500">Lista de tareas</h2>
+
+            <app-button class="lg:w-56 hidden lg:flex" [name]="'Agregar +'"></app-button>
+
+        </div>
+
+        <app-button class="w-24 md:w-36 fixed top-[91%] right-[4%] lg:hidden" [name]="'Agregar +'"></app-button>
+
     </section>
+</section>
