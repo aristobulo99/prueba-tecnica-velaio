@@ -2,6 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Person } from 'src/app/core/interfaces/person';
 import { Task } from 'src/app/core/interfaces/task';
 import { DialogService } from 'src/app/core/services/dialog.service';
@@ -9,6 +10,7 @@ import { HeaderService } from 'src/app/core/services/header.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { PersonService } from 'src/app/core/services/person.service';
 import { TaskService } from 'src/app/core/services/task/task.service';
+import { ToastService } from 'src/app/core/services/toast/toast.service';
 import { ButtonComponent } from 'src/app/shared/components/atom/button/button.component';
 import { InputComponent } from 'src/app/shared/components/atom/input/input.component';
 import { TableComponent } from 'src/app/shared/components/molecules/table/table.component';
@@ -43,7 +45,8 @@ export class CreateTaksComponent {
     private router: Router,
     private headerService: HeaderService,
     private loadingService: LoadingService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private toastService: ToastService
   ){}
 
   ngOnInit(): void {
@@ -100,9 +103,13 @@ export class CreateTaksComponent {
         completed: false,
         persons: this.personList
       }
-      console.log(this.task)
-      this.taskService.postTask(this.task);
-      this.cancelTask();
+      try{
+        this.taskService.postTask(this.task);
+        this.toastService.showSuccess('Tarea creada exitosamente');
+        this.cancelTask();
+      }catch(e){
+        console.error(e);
+      }
     }
   }
 
@@ -110,5 +117,7 @@ export class CreateTaksComponent {
     this.headerService.titleHeaderSet = 'Gestión de tareas';
     this.router.navigate(['home']);
   }
+
+  
 
 }

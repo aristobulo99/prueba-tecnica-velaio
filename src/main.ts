@@ -7,6 +7,7 @@ import { provideRouter, RoutesRecognized } from '@angular/router';
 import { routes } from './app/app-routing.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
+import { provideToastr } from 'ngx-toastr';
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)
@@ -18,6 +19,11 @@ bootstrapApplication(AppComponent,
       provideRouter(routes),
       provideAnimations(),
       provideHttpClient(),
+      provideToastr({
+        timeOut: 10000,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: true,
+      }), 
     ]
   }
 ).catch(err => console.error(err));

@@ -72,6 +72,81 @@
           ]
         }
       ]
+    },
+    {
+      "id": "4122",
+      "nameTask": "Hu04",
+      "dateLimit": "2024-09-29",
+      "completed": true,
+      "persons": [
+        {
+          "name": "Alex",
+          "age": "42",
+          "skills": [
+            "php"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8beb",
+      "nameTask": "HU05",
+      "dateLimit": "2024-09-30",
+      "completed": false,
+      "persons": [
+        {
+          "name": "Luisa",
+          "age": "22",
+          "skills": [
+            "laravel"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ef1b",
+      "nameTask": "Hu06",
+      "dateLimit": "2024-09-29",
+      "completed": false,
+      "persons": [
+        {
+          "name": "Lila",
+          "age": "26",
+          "skills": [
+            "dockert"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "22d0",
+      "nameTask": "HU07",
+      "dateLimit": "2024-09-29",
+      "completed": false,
+      "persons": [
+        {
+          "name": "Maicol",
+          "age": "26",
+          "skills": [
+            "python"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5347",
+      "nameTask": "HU08",
+      "dateLimit": "2024-09-28",
+      "completed": false,
+      "persons": [
+        {
+          "name": "Arnold",
+          "age": "28",
+          "skills": [
+            "free"
+          ]
+        }
+      ]
     }
   ]
 }

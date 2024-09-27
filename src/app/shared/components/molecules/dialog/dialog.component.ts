@@ -37,7 +37,7 @@ export class DialogComponent implements OnInit {
     this.fgPerson = this.fb.group({
       namePerson: new FormControl<string>('', [Validators.required]),
       age: new FormControl<number | null>(null, [Validators.required, this.ageValidator]),
-      skills: new FormControl<string[]>([], [this.skillsValidator])
+      skills: new FormControl<string[]>([], [Validators.required,this.skillsValidator])
     })
   }
 
@@ -62,7 +62,7 @@ export class DialogComponent implements OnInit {
   addSkill(){
     const value = this.formControlSkill.value;
   
-    if(value != null && !this.skillList.includes((value as string).toUpperCase())){
+    if(value != '' && !this.skillList.includes((value as string).toUpperCase())){
       this.skillList.push((value as string).toLowerCase())
       this.fgPerson.get('skills')?.setValue(this.skillList);
     }
@@ -74,7 +74,7 @@ export class DialogComponent implements OnInit {
   }
 
   invalifForm(){
-    return this.fgPerson.invalid && this.skillList.length === 0;
+    return this.fgPerson.invalid || this.skillList.length === 0;
   }
 
   createPerson(){

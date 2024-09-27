@@ -1,6 +1,6 @@
 
     <section class="w-[100%] h-[88vh] lg:h-[90%] p-[0.625rem] lg:p-3 md:flex md:flex-col md:items-center">
-        <section class="w-full h-full bg-white rounded flex flex-col p-3 lg:px-9 lg:py-4">
+        <section class="w-full h-full bg-white rounded flex flex-col p-3 lg:px-9 lg:py-4 overflow-auto	">
             <div class="flex flex-row justify-between items-center">
                 <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-violet-500">Lista de tareas</h2>
     
@@ -9,7 +9,7 @@
             </div>
 
             <div class="w-full flex flex-col gap-2">
-                <app-select [label]="'Filtros:'"
+                <app-select class="w-full md:w-96" [label]="'Filtros:'"
                             [training]="'colum'"
                             [options]="filterList"
                             [selectedOption]="'Todas'"

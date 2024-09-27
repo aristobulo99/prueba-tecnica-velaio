@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
     'Completadas',
     'Pendientes'
   ]
+  public filterOptionSelect: string = 'Todas';
   public taskList: TaskData[] = [];
   
   constructor(
@@ -89,20 +90,15 @@ export class HomeComponent implements OnInit {
             this.getAllTask();
             break;
         }
+        this.filterOptionSelect = $event;
         this.loadingService.activeLoading = false;
       }, 1000
     )
   }
 
   updateStatus(value: {id: string, completed: boolean}){
-    this.loadingService.activeLoading = true;
-    setTimeout(
-      () => {
-        this.taskService.patchTask(value.id, value.completed);
-        this.getAllTask();
-        this.loadingService.activeLoading = false;
-      }, 1000
-    )
+    this.taskService.patchTask(value.id, value.completed);
+    this.selectFilter(this.filterOptionSelect);
   }
 
 }

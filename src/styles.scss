@@ -6,3 +6,32 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.toast-success {
+    position: fixed;
+    top: 1%;
+    right: 2%;
+    display: flex;
+    width: auto;
+    padding: 25px;
+    border-radius: 16px;
+    background-color: #28a745 !important;
+    color: white !important;    
+    font-weight: 700;
+  }
+  
+
+  .toast-error {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+  
+  .toast-close-button {
+    color: white !important;
+  }
+  
+  .toast-progress {
+    background-color: #007bff !important;
+  }
+  
