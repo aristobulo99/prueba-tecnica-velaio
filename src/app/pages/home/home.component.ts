@@ -2,6 +2,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Person } from 'src/app/core/interfaces/person';
 import { Task } from 'src/app/core/interfaces/task';
 import { DialogService } from 'src/app/core/services/dialog.service';
@@ -32,74 +33,14 @@ import { FormControlPipe } from 'src/app/shared/pipe/form-control.pipe';
     TableComponent],
   providers: [DialogService]
 })
-export class HomeComponent implements OnInit {
-
-  public displayHome: boolean = true;
-  public fgTask: FormGroup = new FormGroup({});
-  public task!: Task;
-  public personList: Person[] = [];
-
+export class HomeComponent {
+  
   constructor(
-    private dialogService: DialogService,
-    private fb: FormBuilder,
-    private personService: PersonService
+    private router: Router
   ){}
 
-  validateCreate(): boolean{
-    return !(this.fgTask.valid && this.personList.length > 0);
-  }
-
-  ngOnInit(): void {
-    this.initFormTask();
-  }
-
-  initFormTask(){
-    this.fgTask = this.fb.group({
-      nameTask: new FormControl<string>('', [Validators.required]),
-      dateLimit: new FormControl<Date | string>('', [Validators.required]),
-    })
-  }
-
   createTask(){
-    this.displayHome = false
+    this.router.navigate(['create-task'])
   }
-
-  cancelTask(){
-    this.displayHome = true
-  }
-
-  deployDialog(){
-    this.dialogService.openDialog().afterClosed().subscribe(
-      () => {
-        if(this.personService.personGet.name != null && !this.personList.some(per => per.name === this.personService.personGet.name)){
-          this.personList.push(this.personService.personGet)
-          this.personService.personsSet = this.personList;
-        }
-      }
-    );
-  }
-
-  validateNameTask(): boolean{
-    return (this.fgTask.get('nameTask')?.valid || this.fgTask.get('nameTask')?.untouched) as boolean
-  }
-
-  validateDateLimit(): boolean{
-    return (this.fgTask.get('dateLimit')?.valid || this.fgTask.get('dateLimit')?.untouched) as boolean
-  }
-
-  postTask(){
-    console.log(this.fgTask.valid, this.personList.length > 0)
-    if(this.fgTask.valid && this.personList.length > 0){
-      this.task = {
-        nameTask: this.fgTask.get('nameTask')?.value,
-        dateLimit: this.fgTask.get('dateLimit')?.value,
-        completed: false,
-        persons: this.personList
-      }
-      console.log(this.task)
-      this.cancelTask();
-    }
-  }
-
 
 }
