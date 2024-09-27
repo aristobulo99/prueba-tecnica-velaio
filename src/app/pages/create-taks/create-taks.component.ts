@@ -6,6 +6,7 @@ import { Person } from 'src/app/core/interfaces/person';
 import { Task } from 'src/app/core/interfaces/task';
 import { DialogService } from 'src/app/core/services/dialog.service';
 import { HeaderService } from 'src/app/core/services/header.service';
+import { LoadingService } from 'src/app/core/services/loading.service';
 import { PersonService } from 'src/app/core/services/person.service';
 import { ButtonComponent } from 'src/app/shared/components/atom/button/button.component';
 import { InputComponent } from 'src/app/shared/components/atom/input/input.component';
@@ -40,11 +41,17 @@ export class CreateTaksComponent {
     private personService: PersonService,
     private router: Router,
     private headerService: HeaderService,
+    private loadingService: LoadingService,
   ){}
 
   ngOnInit(): void {
     this.headerService.titleHeaderSet = 'Crear nueva tarea';
     this.initFormTask();
+    setTimeout(
+      () => {
+        this.loadingService.activeLoading = false;
+      }, 1000
+    )
   }
 
   initFormTask(){
@@ -59,14 +66,19 @@ export class CreateTaksComponent {
   }
 
   deployDialog(){
-    this.dialogService.openDialog().afterClosed().subscribe(
-      () => {
-        if(this.personService.personGet.name != null && !this.personList.some(per => per.name === this.personService.personGet.name)){
-          this.personList.push(this.personService.personGet)
-          this.personService.personsSet = this.personList;
+    try{
+      this.dialogService.openDialog().afterClosed().subscribe(
+        () => {
+          if(this.personService.personGet.name != null && !this.personList.some(per => per.name === this.personService.personGet.name)){
+            this.personList.push(this.personService.personGet)
+            this.personService.personsSet = this.personList;
+          }
         }
-      }
-    );
+      );
+    }catch(e){
+      console.log(e)
+    }
+    
   }
 
   validateNameTask(): boolean{

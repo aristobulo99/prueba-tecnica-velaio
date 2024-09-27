@@ -63,7 +63,7 @@ export class DialogComponent implements OnInit {
     const value = this.formControlSkill.value;
   
     if(value != null && !this.skillList.includes((value as string).toUpperCase())){
-      this.skillList.push((value as string).toUpperCase())
+      this.skillList.push((value as string).toLowerCase())
       this.fgPerson.get('skills')?.setValue(this.skillList);
     }
     this.formControlSkill.setValue('');
@@ -78,10 +78,8 @@ export class DialogComponent implements OnInit {
   }
 
   createPerson(){
-    console.log(this.personService.personsGet, this.fgPerson.get('namePerson')?.value)
     const personNameNotRepet = !this.personService.personsGet.some(
       per => {
-        console.log(per.name.toLowerCase(), (this.fgPerson.get('namePerson')?.value as string).toLowerCase())
         return per.name.toLowerCase() === (this.fgPerson.get('namePerson')?.value as string).toLowerCase()
       }
     );

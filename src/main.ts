@@ -6,6 +6,7 @@ import { AppComponent } from './app/app.component';
 import { provideRouter, RoutesRecognized } from '@angular/router';
 import { routes } from './app/app-routing.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)
@@ -14,8 +15,8 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 bootstrapApplication(AppComponent,
   {
     providers: [
-    provideRouter(routes),
-    provideAnimations()
-]
+      provideRouter(routes),
+      provideAnimations()
+    ]
   }
 ).catch(err => console.error(err));

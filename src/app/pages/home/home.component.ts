@@ -36,11 +36,14 @@ import { FormControlPipe } from 'src/app/shared/pipe/form-control.pipe';
 export class HomeComponent {
   
   constructor(
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ){}
 
   createTask(){
-    this.router.navigate(['create-task'])
+    this.loadingService.activeLoading = true;
+    this.router.navigate(['create-task']);
+  
   }
 
 }
