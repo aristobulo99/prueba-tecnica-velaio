@@ -1,64 +1,64 @@
 
+    <section class="w-[100%] h-[88vh] lg:h-[90%] p-[0.625rem] lg:p-3 md:flex md:flex-col md:items-center">
 
-<ng-container *ngIf="displayHome else createFormTask">
-    <section class="w-[100%] h-[88vh] lg:h-[90%] p-[0.625rem] lg:p-3">
-        <section class="w-full h-full bg-white rounded flex flex-col p-3 lg:px-9 lg:py-4">
-            <div class="flex flex-row justify-between items-center">
-                <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-violet-500">Lista de tareas</h2>
-    
-                <app-button class="lg:w-56 hidden lg:flex" [name]="'Agregar +'" (click)="createTask()"></app-button>
-    
-            </div>
-    
-            <app-button class="w-24 md:w-36 fixed top-[91%] right-[4%] lg:hidden" 
-                        [name]="'Agregar +'" (click)="createTask()">
-            </app-button>
-    
-        </section>
-    </section>
+        <ng-container *ngIf="displayHome else createFormTask">
+            <section class="w-full h-full bg-white rounded flex flex-col p-3 lg:px-9 lg:py-4">
+                <div class="flex flex-row justify-between items-center">
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-violet-500">Lista de tareas</h2>
+        
+                    <app-button class="lg:w-56 hidden lg:flex" [name]="'Agregar +'" (click)="createTask()"></app-button>
+        
+                </div>
+        
+                <app-button class="w-24 md:w-36 fixed top-[91%] right-[4%] lg:hidden" 
+                            [name]="'Agregar +'" (click)="createTask()">
+                </app-button>
+        
+            </section>
+        </ng-container>
 
-</ng-container>
-
-<ng-template #createFormTask>
-    <section class="flex flex-col w-full bg-white px-2 !gap-2 ">
-        <div class="w-full flex flex-row justify-center pt-3">
-          <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-violet-500">Crear nueva tarea</h1>
-        </div>
-        <form [formGroup]="fgTask" class="flex flex-col w-full gap-3">
-          <div class="w-full flex flex-col gap-1">
-            <div class="w-full flex flex-col gap-1">
-                <app-input [label]="'Nombre de la tarea:'" 
-                       [type]="'text'" 
-                       [valid]="validateNameTask()"
-                       [training]="'colum'" 
-                       [control]="fgTask.controls['nameTask'] | formControlPipe"></app-input>
-                <p class="text-sm md:text-base lg:text-lg text-red-500" [ngClass]="{'hidden': validateNameTask()}">Campo obligatorio</p>
-            </div>
-
-            <div class="w-full flex flex-col gap-1">
-                <app-input [label]="'Fecha límite:'" 
-                       [type]="'date'" 
-                       [training]="'colum'" 
-                       [control]="fgTask.controls['dateLimit'] | formControlPipe"
-                       [valid]="validateDateLimit()"></app-input>
-                <p class="text-sm md:text-base lg:text-lg text-red-500" [ngClass]="{'hidden': validateDateLimit()}">Campo obligatorio</p>
-            </div>
+        <ng-template #createFormTask>
+            <section class="w-full h-full md:w-[50%] lg:w-[80%] bg-white rounded flex flex-col p-3 lg:px-9 lg:py-4">
+                <div class="w-full flex flex-row justify-center pt-3">
+                  <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-violet-500">Crear nueva tarea</h1>
+                </div>
+                <form [formGroup]="fgTask" class="flex flex-col w-full gap-3">
+                  <div class="w-full flex flex-col lg:flex-row gap-1 lg:gap-2">
+                    <div class="w-full flex flex-col gap-1">
+                        <app-input [label]="'Nombre de la tarea:'" 
+                               [type]="'text'" 
+                               [valid]="validateNameTask()"
+                               [training]="'colum'" 
+                               [control]="fgTask.controls['nameTask'] | formControlPipe"></app-input>
+                        <p class="text-sm md:text-base lg:text-lg text-red-500" [ngClass]="{'hidden': validateNameTask()}">Campo obligatorio</p>
+                    </div>
+        
+                    <div class="w-full flex flex-col gap-1">
+                        <app-input [label]="'Fecha límite:'" 
+                               [type]="'date'" 
+                               [training]="'colum'" 
+                               [control]="fgTask.controls['dateLimit'] | formControlPipe"
+                               [valid]="validateDateLimit()"></app-input>
+                        <p class="text-sm md:text-base lg:text-lg text-red-500" [ngClass]="{'hidden': validateDateLimit()}">Campo obligatorio</p>
+                    </div>
+                  </div>  
+                  
+                  <div class="w-full flex flex-col justify-start gap-1">
+                    <p class="text-sm md:text-base lg:text-lg font-bold text-violet-500">Personas Asociadas</p>
+        
+                    <app-table [persons]="personList"></app-table>
+        
+                    <app-button class="w-28" [name]="'Añadir Persona'" (click)="deployDialog()"></app-button>
+                  </div>
+                  <app-button class="w-full" [name]="'Guardar Tarea'" [disable]="validateCreate()" (click)="postTask()"></app-button>
+        
+                  <app-button class="w-full" [name]="'Cancelar'" (click)="cancelTask()"></app-button>
+                </form>
+                
+            </section>
             
-    
-            
-          </div>  
-          
-          <div class="w-full flex flex-col justify-start gap-1">
-            <p class="text-sm md:text-base lg:text-lg font-bold text-violet-500">Personas Asociadas</p>
-
-            <app-button class="w-28" [name]="'Añadir Persona'" (click)="deployDialog()"></app-button>
-          </div>
-          <app-button class="w-full" [name]="'Guardar Tarea'" [disable]="validateCreate()"></app-button>
-
-          <app-button class="w-full" [name]="'Cancelar'" (click)="cancelTask()"></app-button>
-        </form>
+        
+        </ng-template>
         
     </section>
-    
 
-</ng-template>

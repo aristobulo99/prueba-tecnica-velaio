@@ -1,0 +1,17 @@
+<section class="w-full flex flex-col" *ngFor="let person of persons; let i = index">
+    <section *ngIf="i == 0">
+        <div class="flex flex-row w-full text-sm md:text-base lg:text-lg font-semibold text-violet-500 bg-violet-100">
+            <p class="flex flex-col justify-center items-center w-[40%] h-[2.5rem]">Nombre</p>
+            <p class="flex flex-col justify-center items-center w-[40%] h-[2.5rem]">Edad</p>
+            <p class="flex flex-col justify-center items-center w-[40%] h-[2.5rem]"></p>
+        </div>
+    </section>
+
+    <div class="flex flex-row w-full text-sm md:text-base lg:text-lg font-medium text-violet-500 border-2">
+        <p class="flex flex-col justify-center items-center w-[40%] h-[2.5rem]">{{person.name}}</p>
+        <p class="flex flex-col justify-center items-center w-[40%] h-[2.5rem]">{{person.age}} Años</p>
+        <p class="flex  flex-col justify-center items-center w-[30%] h-[2.5rem] font-extrabold cursor-pointer underline text-red-500" 
+           (click)="removePerson(i)">Eliminar</p>
+    </div>
+
+</section>

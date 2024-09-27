@@ -11,6 +11,7 @@ import { ButtonComponent } from 'src/app/shared/components/atom/button/button.co
 import { InputComponent } from 'src/app/shared/components/atom/input/input.component';
 import { SelectComponent } from 'src/app/shared/components/atom/select/select.component';
 import { DialogComponent } from 'src/app/shared/components/molecules/dialog/dialog.component';
+import { TableComponent } from 'src/app/shared/components/molecules/table/table.component';
 import { FormControlPipe } from 'src/app/shared/pipe/form-control.pipe';
 
 @Component({
@@ -27,7 +28,8 @@ import { FormControlPipe } from 'src/app/shared/pipe/form-control.pipe';
     NgClass,
     FormsModule, 
     ReactiveFormsModule, 
-    FormControlPipe],
+    FormControlPipe,
+    TableComponent],
   providers: [DialogService]
 })
 export class HomeComponent implements OnInit {
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
   ){}
 
   validateCreate(): boolean{
-    return !(this.fgTask.valid && this.task?.persons.length > 0);
+    return !(this.fgTask.valid && this.personList.length > 0);
   }
 
   ngOnInit(): void {
@@ -69,10 +71,12 @@ export class HomeComponent implements OnInit {
   deployDialog(){
     this.dialogService.openDialog().afterClosed().subscribe(
       () => {
+        if(this.personService.personGet.name != null && !this.personList.some(per => per.name === this.personService.personGet.name)){
           this.personList.push(this.personService.personGet)
+          this.personService.personsSet = this.personList;
+        }
       }
     );
-    console.log(this.personList);
   }
 
   validateNameTask(): boolean{
@@ -81,6 +85,20 @@ export class HomeComponent implements OnInit {
 
   validateDateLimit(): boolean{
     return (this.fgTask.get('dateLimit')?.valid || this.fgTask.get('dateLimit')?.untouched) as boolean
+  }
+
+  postTask(){
+    console.log(this.fgTask.valid, this.personList.length > 0)
+    if(this.fgTask.valid && this.personList.length > 0){
+      this.task = {
+        nameTask: this.fgTask.get('nameTask')?.value,
+        dateLimit: this.fgTask.get('dateLimit')?.value,
+        completed: false,
+        persons: this.personList
+      }
+      console.log(this.task)
+      this.cancelTask();
+    }
   }
 
 

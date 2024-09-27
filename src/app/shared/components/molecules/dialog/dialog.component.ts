@@ -78,13 +78,27 @@ export class DialogComponent implements OnInit {
   }
 
   createPerson(){
-    this.person = {
-      name: this.fgPerson.get('namePerson')?.value,
-      age: this.fgPerson.get('age')?.value,
-      skills: this.fgPerson.get('skills')?.value,
+    console.log(this.personService.personsGet, this.fgPerson.get('namePerson')?.value)
+    const personNameNotRepet = !this.personService.personsGet.some(
+      per => {
+        console.log(per.name.toLowerCase(), (this.fgPerson.get('namePerson')?.value as string).toLowerCase())
+        return per.name.toLowerCase() === (this.fgPerson.get('namePerson')?.value as string).toLowerCase()
+      }
+    );
+    console.log(this.fgPerson.valid, personNameNotRepet)
+    if(this.fgPerson.valid && personNameNotRepet){
+      this.person = {
+        name: this.fgPerson.get('namePerson')?.value,
+        age: this.fgPerson.get('age')?.value,
+        skills: this.fgPerson.get('skills')?.value,
+      }
+      this.personService.personSet = this.person;
+      this.dialogRef.close();
+      this.fgPerson.reset();
+    }else{
+      this.fgPerson.markAllAsTouched();
+      this.fgPerson.reset();
     }
-    this.personService.personSet = this.person;
-    this.dialogRef.close(this.person);
   }
 
 

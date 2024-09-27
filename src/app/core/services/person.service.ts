@@ -7,6 +7,7 @@ import { Person } from '../interfaces/person';
 export class PersonService {
 
   private person!: Person
+  private persons: Person[] = [];
 
   constructor() { }
 
@@ -16,5 +17,13 @@ export class PersonService {
 
   get personGet(){
     return this.person;
+  }
+
+  set personsSet(persons: Person[]){
+    this.persons = persons;
+  }
+
+  get personsGet(){
+    return this.persons;
   }
 }
