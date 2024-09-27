@@ -8,6 +8,7 @@ import { DialogService } from 'src/app/core/services/dialog.service';
 import { HeaderService } from 'src/app/core/services/header.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { PersonService } from 'src/app/core/services/person.service';
+import { TaskService } from 'src/app/core/services/task/task.service';
 import { ButtonComponent } from 'src/app/shared/components/atom/button/button.component';
 import { InputComponent } from 'src/app/shared/components/atom/input/input.component';
 import { TableComponent } from 'src/app/shared/components/molecules/table/table.component';
@@ -42,6 +43,7 @@ export class CreateTaksComponent {
     private router: Router,
     private headerService: HeaderService,
     private loadingService: LoadingService,
+    private taskService: TaskService
   ){}
 
   ngOnInit(): void {
@@ -99,6 +101,7 @@ export class CreateTaksComponent {
         persons: this.personList
       }
       console.log(this.task)
+      this.taskService.postTask(this.task);
       this.cancelTask();
     }
   }
