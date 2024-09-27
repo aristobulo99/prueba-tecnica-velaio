@@ -1,0 +1,26 @@
+<section *ngIf="task != null" class="w-full">
+    <section class="w-full flex flex-row">
+        <app-radio-button class="w-8" [isSelected]="task.completed" (selectButton)="selectRadioButton($event)"></app-radio-button>
+
+        <div class="w-full flex flex-col justify-start">
+            <div class="flex flex-row text-sm md:text-base lg:text-lg text-violet-500 gap-1">
+                <p class="font-bold">{{numerator}}.</p>
+
+                <p class="font-normal">{{task.nameTask}} - {{task.dateLimit}}</p>
+            </div>
+
+            <div class="w-full flex flex-col text-sm md:text-base lg:text-lg text-violet-500 ">
+                <p class="font-bold">Personas Asociadas:</p>
+
+                <ul class="flex flex-col pr-3 list-inside list-disc" *ngFor="let person of task.persons; let i = index">
+                    <li class="font-normal">{{person.name}} ({{person.age}})</li>
+
+                    <li class="list-none font-bold indent-[1.25rem]">Habilidades: <span class="font-normal"> {{joinSkill(person.skills)}}</span> </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </section>
+
+</section>

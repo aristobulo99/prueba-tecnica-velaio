@@ -6,3 +6,7 @@ export interface Task{
     completed: boolean
     persons: Person[]
 }
+
+export interface TaskData extends Task{
+    id: string
+}

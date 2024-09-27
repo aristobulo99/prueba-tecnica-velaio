@@ -7,6 +7,19 @@
                 <app-button class="lg:w-56 hidden lg:flex" [name]="'Agregar +'" (click)="createTask()"></app-button>
     
             </div>
+
+            <div class="w-full flex flex-col gap-2">
+                <app-select [label]="'Filtros:'"
+                            [training]="'colum'"
+                            [options]="filterList"
+                            (optionEvent)="selectFilter($event)">
+                </app-select>
+
+                <div class="w-full flex flex-col" *ngFor="let task of taskList; let i = index">
+                    <app-card-task [task]="task" [numerator]="i+1" (selectTask)="updateStatus($event)"></app-card-task>
+                </div>
+
+            </div>
     
             <app-button class="w-24 md:w-36 fixed top-[91%] right-[4%] lg:hidden" 
                         [name]="'Agregar +'" (click)="createTask()">
