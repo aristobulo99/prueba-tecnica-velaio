@@ -20,6 +20,12 @@ export class TaskService {
     );
   }
 
+  async getByCompleted(completed: boolean){
+    return await lastValueFrom(
+      this.http.get<TaskData[]>(`${this.url}/?completed=${completed}`)
+    )
+  }
+
   async postTask(task: Task){
     return await lastValueFrom(
       this.http.post(this.url, task)
@@ -31,4 +37,5 @@ export class TaskService {
       this.http.patch(`${this.url}/${id}`,{completed})
     )
   }
+
 }

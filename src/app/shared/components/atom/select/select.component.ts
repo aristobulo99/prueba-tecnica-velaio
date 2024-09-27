@@ -1,12 +1,13 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   standalone: true,
-  imports:[NgClass, NgFor]
+  imports:[NgClass, NgFor, FormsModule]
 })
 export class SelectComponent {
 
@@ -15,7 +16,9 @@ export class SelectComponent {
   @Input() training: 'row' | 'colum' = 'row'
   @Input() valid: boolean = true;
   @Input() options: string[] = [];
+  @Input() selectedOption: string = this.options[0];
   @Output() optionEvent: EventEmitter<string> = new EventEmitter<string>();
+
 
   get sectionStyle(){
     return {
@@ -38,8 +41,10 @@ export class SelectComponent {
     }
   }
 
-  optionSelect(option: string) {
-    this.optionEvent.emit(option);
+  optionSelect(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedOption = selectElement.value;
+    this.optionEvent.emit(this.selectedOption);
   }
 
 }

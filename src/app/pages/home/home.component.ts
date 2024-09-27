@@ -61,6 +61,10 @@ export class HomeComponent implements OnInit {
     this.taskList = await this.taskService.getAllTask();
   }
 
+  async getByCompletedTask(value: boolean){
+    this.taskList = await this.taskService.getByCompleted(value);
+  }
+
   createTask(){
     this.loadingService.activeLoading = true;
     this.router.navigate(['create-task']);
@@ -68,13 +72,37 @@ export class HomeComponent implements OnInit {
   }
 
   selectFilter($event: string) {
-    console.log($event);
+    this.loadingService.activeLoading = true;
+    setTimeout(
+      () => {
+        switch($event){
+          case 'Todas':
+            this.getAllTask();
+            break;
+          case 'Completadas':
+            this.getByCompletedTask(true);
+            break;
+          case 'Pendientes':
+            this.getByCompletedTask(false);
+            break;
+          default:
+            this.getAllTask();
+            break;
+        }
+        this.loadingService.activeLoading = false;
+      }, 1000
+    )
   }
 
   updateStatus(value: {id: string, completed: boolean}){
-    console.log(this.taskList)
-    this.taskService.patchTask(value.id, value.completed);
-    this.getAllTask();
+    this.loadingService.activeLoading = true;
+    setTimeout(
+      () => {
+        this.taskService.patchTask(value.id, value.completed);
+        this.getAllTask();
+        this.loadingService.activeLoading = false;
+      }, 1000
+    )
   }
 
 }

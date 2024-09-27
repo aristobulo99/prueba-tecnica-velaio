@@ -4,7 +4,7 @@
       "id": "fedc",
       "nameTask": "Hu015",
       "dateLimit": "2024-09-28",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "junior",
@@ -37,6 +37,38 @@
             "html",
             "css",
             "angular"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a970",
+      "nameTask": "HU02",
+      "dateLimit": "2024-09-29",
+      "completed": true,
+      "persons": [
+        {
+          "name": "Carlos",
+          "age": "24",
+          "skills": [
+            "java",
+            "sql",
+            "nosql",
+            "aws"
+          ]
+        },
+        {
+          "name": "Juan",
+          "age": "26",
+          "skills": [
+            "figma"
+          ]
+        },
+        {
+          "name": "Jhon Conor",
+          "age": "30",
+          "skills": [
+            "python"
           ]
         }
       ]

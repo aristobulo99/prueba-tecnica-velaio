@@ -1,8 +1,11 @@
 
 <section class="flex w-full bg-white gap-2" [ngClass]=sectionStyle>
     <label class="max-w-52 text-sm md:text-base lg:text-lg font-bold" [ngClass]="labelStyle" >{{label}}</label>
-    <select class="w-full h-[2.5rem] text-sm md:text-base lg:text-lg md:h-[3rem] 
-                   border-[0.125rem] md:border-[0.0.144rem] outline-none p-1 rounded-md" [ngClass]="selectStyle">
-        <option *ngFor="let option of options" [value]="option" (click)="optionSelect(option)">{{option}}</option>
+    <select class="w-full h-[2.5rem] text-sm md:text-base lg:text-lg md:h-[3rem]  
+                   border-[0.125rem] md:border-[0.0.144rem] outline-none p-1 rounded-md" 
+                   [ngClass]="selectStyle" 
+                   [(ngModel)]="selectedOption"
+                   (change)="optionSelect($event)">
+        <option *ngFor="let option of options" [value]="option">{{option}}</option>
     </select>
 </section>
