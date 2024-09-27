@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../app/shared/components/molecules/header/header.component";
 import { RouterModule } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, RouterModule],
+  imports: [HeaderComponent, RouterModule, MatDialogModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

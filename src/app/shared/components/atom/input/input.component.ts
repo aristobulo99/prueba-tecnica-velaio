@@ -1,12 +1,15 @@
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControlPipe } from 'src/app/shared/pipe/form-control.pipe';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
   standalone: true,
-  imports: [NgClass]
+  imports: [NgClass, ReactiveFormsModule]
+  
 })
 export class InputComponent {
 
@@ -14,6 +17,7 @@ export class InputComponent {
   @Input() label: string | null = null
   @Input() training: 'row' | 'colum' = 'row'
   @Input() valid: boolean = true;
+  @Input() control: FormControl = new FormControl('');
 
 
   get sectionStyle(){
@@ -25,6 +29,7 @@ export class InputComponent {
 
   get labelStyle(){
     return {
+      'hidden': this.label === null,
       'text-violet-500': this.valid === true,
       'text-red-500': this.valid === false
     }

@@ -1,0 +1,55 @@
+<section class="flex flex-col w-full bg-white px-2 gap-2 ">
+    <div class="w-full flex flex-row justify-center pt-3">
+      <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-violet-500">Personas Asociadas</h1>
+    </div>
+
+    <div class="flex flex-col w-full mr-2 gap-2" [formGroup]="fgPerson">
+      <div class="w-full flex flex-col gap-1">
+        <app-input [label]="'Nombre completo:'" 
+                 [type]="'text'" 
+                 [training]="'colum'" 
+                 [control]="fgPerson.controls['namePerson'] | formControlPipe" 
+                 [valid]="validInput('namePerson')">
+        </app-input>
+        <small class="text-sm md:text-base lg:text-lg text-red-500" [ngClass]="{'hidden': validInput('namePerson')}">Campo obligatorio</small>
+      </div>
+
+      <div class="w-full flex flex-col gap-1">
+        <app-input [label]="'Edad:'" 
+                 [type]="'number'" 
+                 [training]="'colum'" 
+                 [control]="fgPerson.controls['age'] | formControlPipe" 
+                 [valid]="validInput('age')">
+        </app-input>
+        <p [ngClass]="{'hidden': validInput('age')}">
+          <small class="text-sm md:text-base lg:text-lg text-red-500" *ngIf="fgPerson.get('age')?.hasError('required')">Campo obligatorio</small>
+          <small class="text-sm md:text-base lg:text-lg text-red-500" *ngIf="fgPerson.get('age')?.hasError('ageInvalid')">La edad minima es de 18 años</small>
+        </p>
+      </div>
+      
+
+      <p class="text-sm md:text-base lg:text-lg font-bold text-violet-500">Habilidades:</p>
+      
+      <div class="w-full flex flex-row justify-between items-center" *ngFor="let skill of skillList; let i = index">
+        <p class="w-[90%] text-sm md:text-base lg:text-lg text-purple-500">{{skill}}</p>
+        <app-button [name]="'Eliminar Habilidades'" [color]="'red'" (click)="deleteSkill(i)"></app-button> 
+      </div>
+
+      <div class="w-full flex flex-row">
+        <div class="w-full flex flex-col gap-1">
+          <app-input [type]="'text'" 
+                   [training]="'row'" 
+                   [control]="formControlSkill | formControlPipe" [valid]="validSkillVal">
+          </app-input>
+        </div>
+        
+
+       <app-button [name]="'Añadir Habilidades'" (click)="addSkill()"></app-button> 
+      </div>
+
+      <app-button [name]="'Añadir Persona'" [disable]="invalifForm()" (click)="createPerson()"></app-button> 
+      <br>
+    </div>
+
+    
+</section>

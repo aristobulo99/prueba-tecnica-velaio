@@ -12,17 +12,15 @@ export class ButtonComponent {
 
   @Input() name: string = ''
   @Input() disable: boolean = false;
-  @Output() click: EventEmitter<void> = new EventEmitter();
+  @Input() color: 'purple' | 'red' = 'purple';
 
   get divStyle(){
     return {
-      'bg-purple-500 hover:bg-purple-300 cursor-pointer': this.disable === false,
-      'bg-gray-400 opacity-50': this.disable === true,
+      'cursor-pointer': this.disable === false,
+      'bg-purple-500 hover:bg-purple-300 cursor-pointer': this.color === 'purple',
+      'bg-red-500 hover:bg-red-300 cursor-pointer': this.color === 'red',
+      'opacity-40': this.disable === true,
     }
-  }
-
-  clickEventEmitter(){
-    this.click.emit();
   }
 
 }
