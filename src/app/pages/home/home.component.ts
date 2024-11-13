@@ -1,8 +1,10 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
 import { Person } from 'src/app/core/interfaces/person';
 import { Task, TaskData } from 'src/app/core/interfaces/task';
 import { DialogService } from 'src/app/core/services/dialog.service';
@@ -16,6 +18,9 @@ import { CardTaskComponent } from 'src/app/shared/components/molecules/card-task
 import { DialogComponent } from 'src/app/shared/components/molecules/dialog/dialog.component';
 import { TableComponent } from 'src/app/shared/components/molecules/table/table.component';
 import { FormControlPipe } from 'src/app/shared/pipe/form-control.pipe';
+import { getAllTaskRequest, getTaskCompleteRequest, patchTaskCompleteRequest } from 'src/app/store/action/tasks.actions';
+import { AppState } from 'src/app/store/app.state';
+import { selectorTask } from 'src/app/store/selectors/tasks.selectors';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +43,7 @@ import { FormControlPipe } from 'src/app/shared/pipe/form-control.pipe';
   ],
   providers: [DialogService]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   public filterList: string[] = [
     'Todas', 
@@ -47,23 +52,34 @@ export class HomeComponent implements OnInit {
   ]
   public filterOptionSelect: string = 'Todas';
   public taskList: TaskData[] = [];
+  public unsubscribe$: Subject<void> = new Subject<void>();
   
   constructor(
     private router: Router,
     private loadingService: LoadingService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private store: Store<AppState>
   ){}
 
-  async ngOnInit() {
-      await this.getAllTask();
+  ngOnInit() {
+      this.getAllTask();
   }
 
-  async getAllTask(){
-    this.taskList = await this.taskService.getAllTask();
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  getAllTask(){
+    this.store.dispatch(getAllTaskRequest());
+
+    this.store.select(selectorTask)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(tasks => this.taskList = [...tasks])
   }
 
   async getByCompletedTask(value: boolean){
-    this.taskList = await this.taskService.getByCompleted(value);
+    this.store.dispatch(getTaskCompleteRequest({complete: value}));
   }
 
   createTask(){
@@ -78,7 +94,7 @@ export class HomeComponent implements OnInit {
       () => {
         switch($event){
           case 'Todas':
-            this.getAllTask();
+            this.store.dispatch(getAllTaskRequest());
             break;
           case 'Completadas':
             this.getByCompletedTask(true);
@@ -87,7 +103,7 @@ export class HomeComponent implements OnInit {
             this.getByCompletedTask(false);
             break;
           default:
-            this.getAllTask();
+            this.store.dispatch(getAllTaskRequest());
             break;
         }
         this.filterOptionSelect = $event;
@@ -97,7 +113,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateStatus(value: {id: string, completed: boolean}){
-    this.taskService.patchTask(value.id, value.completed);
+    this.store.dispatch(patchTaskCompleteRequest({patchTask: {id: value.id, completed: value.completed}}))
     this.selectFilter(this.filterOptionSelect);
   }
 

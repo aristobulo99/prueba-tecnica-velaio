@@ -74,7 +74,7 @@ export class CreateTaksComponent {
     try{
       this.dialogService.openDialog().afterClosed().subscribe(
         () => {
-          if(this.personService.personGet.name != null && !this.personList.some(per => per.name === this.personService.personGet.name)){
+          if(this.personService.personGet?.name != null && !this.personList.some(per => per.name === this.personService.personGet.name)){
             this.personList.push(this.personService.personGet)
             this.personService.personsSet = this.personList;
           }

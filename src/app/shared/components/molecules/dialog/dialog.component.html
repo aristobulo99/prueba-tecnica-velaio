@@ -47,7 +47,7 @@
        <app-button [name]="'Añadir Habilidades'" (click)="addSkill()"></app-button> 
       </div>
 
-      <app-button [name]="'Añadir Persona'" [disable]="invalifForm()" (click)="createPerson()"></app-button> 
+      <app-button [name]="'Añadir Persona'" [disable]="invalifForm()" (click)="!invalifForm() ? createPerson() : ''"></app-button> 
       <br>
     </div>
 

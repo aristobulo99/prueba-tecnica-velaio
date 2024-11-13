@@ -14,16 +14,12 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  async getAllTask(){
-    return await lastValueFrom(
-      this.http.get<TaskData[]>(this.url)
-    );
+  getAllTask(){
+    return this.http.get<TaskData[]>(this.url)
   }
 
-  async getByCompleted(completed: boolean){
-    return await lastValueFrom(
-      this.http.get<TaskData[]>(`${this.url}/?completed=${completed}`)
-    )
+  getByCompleted(completed: boolean){
+    return this.http.get<TaskData[]>(`${this.url}/?completed=${completed}`);
   }
 
   async postTask(task: Task){
@@ -32,10 +28,8 @@ export class TaskService {
     )
   }
 
-  async patchTask(id: string, completed: boolean){
-    return await lastValueFrom(
-      this.http.patch(`${this.url}/${id}`,{completed})
-    )
+  patchTask(id: string, completed: boolean){
+    return this.http.patch(`${this.url}/${id}`,{completed})
   }
 
 }

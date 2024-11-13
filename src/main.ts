@@ -12,10 +12,9 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { isDevMode } from '@angular/core';
+import { ROOT_REDUCERS } from './app/store/app.state';
+import { TaksEffects } from './app/store/effects/tasks.effects';
 
-
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
 
 bootstrapApplication(AppComponent,
   {
@@ -28,8 +27,8 @@ bootstrapApplication(AppComponent,
         positionClass: 'toast-bottom-right',
         preventDuplicates: true,
     }),
-    provideStore(),
-    provideEffects(),
+    provideStore(ROOT_REDUCERS),
+    provideEffects([TaksEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
 ]
   }

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { isDevMode, NgModule } from '@angular/core';
+import { BrowserModule, platformBrowser } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
