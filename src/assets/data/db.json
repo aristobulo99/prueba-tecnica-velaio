@@ -19,7 +19,7 @@
       "id": "1f14",
       "nameTask": "HU01",
       "dateLimit": "2024-09-25",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Maria Jose",
@@ -107,7 +107,7 @@
       "id": "ef1b",
       "nameTask": "Hu06",
       "dateLimit": "2024-09-29",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Lila",
@@ -122,7 +122,7 @@
       "id": "22d0",
       "nameTask": "HU07",
       "dateLimit": "2024-09-29",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Maicol",
@@ -144,6 +144,21 @@
           "age": "28",
           "skills": [
             "free"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "94a7",
+      "nameTask": "Hu01",
+      "dateLimit": "2024-10-01",
+      "completed": false,
+      "persons": [
+        {
+          "name": "Junior",
+          "age": "18",
+          "skills": [
+            "angular"
           ]
         }
       ]

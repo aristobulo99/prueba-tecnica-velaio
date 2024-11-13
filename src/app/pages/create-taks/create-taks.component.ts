@@ -95,7 +95,7 @@ export class CreateTaksComponent {
   }
 
   postTask(){
-    console.log(this.fgTask.valid, this.personList.length > 0)
+    
     if(this.fgTask.valid && this.personList.length > 0){
       this.task = {
         nameTask: this.fgTask.get('nameTask')?.value,

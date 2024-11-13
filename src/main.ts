@@ -8,6 +8,10 @@ import { routes } from './app/app-routing.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { isDevMode } from '@angular/core';
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)
@@ -16,14 +20,17 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 bootstrapApplication(AppComponent,
   {
     providers: [
-      provideRouter(routes),
-      provideAnimations(),
-      provideHttpClient(),
-      provideToastr({
+    provideRouter(routes),
+    provideAnimations(),
+    provideHttpClient(),
+    provideToastr({
         timeOut: 10000,
         positionClass: 'toast-bottom-right',
         preventDuplicates: true,
-      }), 
-    ]
+    }),
+    provideStore(),
+    provideEffects(),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+]
   }
 ).catch(err => console.error(err));
