@@ -17,4 +17,12 @@ export class ToastService {
       progressBar: true
     });
   }
+
+  showWarning(value: string){
+    this.toastrService.warning(value, '', {
+      positionClass: 'toast-top-right', 
+      timeOut: 30000,              
+      progressBar: true
+    });
+  }
 }

@@ -19,7 +19,7 @@
       "id": "1f14",
       "nameTask": "HU01",
       "dateLimit": "2024-09-25",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Maria Jose",
@@ -92,7 +92,7 @@
       "id": "8beb",
       "nameTask": "HU05",
       "dateLimit": "2024-09-30",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Luisa",
@@ -107,7 +107,7 @@
       "id": "ef1b",
       "nameTask": "Hu06",
       "dateLimit": "2024-09-29",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Lila",
@@ -122,7 +122,7 @@
       "id": "22d0",
       "nameTask": "HU07",
       "dateLimit": "2024-09-29",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Maicol",
@@ -137,13 +137,50 @@
       "id": "5347",
       "nameTask": "HU08",
       "dateLimit": "2024-09-28",
-      "completed": false,
+      "completed": true,
       "persons": [
         {
           "name": "Arnold",
           "age": "28",
           "skills": [
             "free"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "94a7",
+      "nameTask": "Hu01",
+      "dateLimit": "2024-10-01",
+      "completed": true,
+      "persons": [
+        {
+          "name": "Junior",
+          "age": "18",
+          "skills": [
+            "angular"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5c84",
+      "nameTask": "HU0199",
+      "dateLimit": "2024-11-29",
+      "completed": true,
+      "persons": [
+        {
+          "name": "Juan",
+          "age": "28",
+          "skills": [
+            "front end"
+          ]
+        },
+        {
+          "name": "Jhon",
+          "age": "30",
+          "skills": [
+            "back end"
           ]
         }
       ]

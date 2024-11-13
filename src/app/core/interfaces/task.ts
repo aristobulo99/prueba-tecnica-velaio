@@ -10,3 +10,9 @@ export interface Task{
 export interface TaskData extends Task{
     id: string
 }
+
+export interface StateInitTask {
+    tasks: TaskData[],
+    loading: boolean,
+    success: boolean
+}

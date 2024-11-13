@@ -32,7 +32,7 @@
           </div>
           <app-button class="w-full" [name]="'Guardar Tarea'" [disable]="validateCreate()" (click)="postTask()"></app-button>
     
-          <app-button class="w-full" [name]="'Cancelar'" (click)="cancelTask()"></app-button>
+          <app-button class="w-full" [name]="'Cancelar'" [color]="'red'" (click)="cancelTask()"></app-button>
         </form>
         
     </section>

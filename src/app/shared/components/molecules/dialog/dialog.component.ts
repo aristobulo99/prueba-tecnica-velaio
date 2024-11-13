@@ -92,11 +92,18 @@ export class DialogComponent implements OnInit {
       }
       this.personService.personSet = this.person;
       this.dialogRef.close();
-      this.fgPerson.reset();
+      this.resetFgPerson();
     }else{
       this.fgPerson.markAllAsTouched();
-      this.fgPerson.reset();
+      this.resetFgPerson();
     }
+  }
+
+  resetFgPerson(){
+    this.fgPerson.get('namePerson')?.setValue('');
+    this.fgPerson.get('age')?.setValue(null);
+    this.fgPerson.get('skills')?.setValue([]);
+    this.skillList = [];
   }
 
 
